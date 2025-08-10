@@ -19,13 +19,32 @@ declare interface Account {
     shareableId:string
 }
 
+declare interface User {
+    $id: string;
+    email: string;
+    userId:string;
+    dwollaCustomerUrl: string;
+    dwollaCustomerId: string;
+    firstName: string;
+    lastName:string;
+    name:string;
+    address1:string;
+    city:string;
+    state:string;
+    postalcode: string;
+    dateOfBirth: string;
+    ssn:string
+}
+
 declare interface TotalBalanceProps {
     accounts:Account[];
     totalBanks:number;
     totalCurrentBalance: number
 }
 
-
+declare interface SidebarProps {
+    user: User
+}
 
 
 declare interface DoughnutChartProps {

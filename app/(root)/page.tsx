@@ -13,7 +13,7 @@ export default function Home() {
             user={loggedIn?.firstName || "Guest"}
             subtext="Access and manage your account and transactions efficiently"
           />
-          <TotalBalanceBox accounts={['account']} totalBanks={1} totalCurrentBalance={0}/>
+          <TotalBalanceBox accounts={[]} totalBanks={1} totalCurrentBalance={0}/>
         </header>
       </div>
     </section>
