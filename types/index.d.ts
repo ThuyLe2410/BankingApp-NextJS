@@ -51,3 +51,19 @@ declare interface DoughnutChartProps {
     accounts: Account[]
 }
 
+declare interface MobileNavProps {
+    user: User
+}
+
+declare interface RightSidebarProps {
+    user: {firstName:string};
+    transactions: string[];
+    banks: string[]
+}
+
+declare interface CreditCardProps {
+    account: Account;
+    userName:string;
+    showBalance:boolean
+}
+

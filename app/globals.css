@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+}
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -26,7 +31,6 @@
   --shadow-profile: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-form: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
-
 
 .glassmorphism {
   background: rgba(255, 255, 255, 0.25);
@@ -83,6 +87,10 @@
 .text-36 {
   font-size: 36px;
   line-height: 44px;
+}
+/* Font  */
+.font-ibm-plex-serif {
+  font-family: "IBM Plex Serif", serif;
 }
 
 /* Hide scrollbar utilities */
@@ -263,18 +271,17 @@
 
 /* Right sidebar */
 .right-sidebar {
-  @apply hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll;
+  @apply hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex min-w-[300px] 2xl:min-w-[355px] xl:overflow-y-scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 .right-sidebar::-webkit-scrollbar {
   display: none;
 }
 
 .profile-banner {
   @apply h-[120px] w-full bg-cover bg-no-repeat;
-  background-image: var(--color-gradient-mesh);
+  background-image: url('/icons/gradient-mesh.svg');
 }
 
 .profile {
@@ -310,7 +317,7 @@
 
 /* My Banks */
 .bg-bank-gradient {
-  @apply bg-gradient-to-r from-[#0179FE] to-[#4893FF]
+  @apply bg-gradient-to-r from-[#0179FE] to-[#4893FF];
 }
 
 .my-banks {
@@ -559,6 +566,9 @@
 /* Sidebar */
 .sidebar {
   @apply sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
+}
+.font-imb-plex-serif {
+  font-family: "IBM Plex Serif", serif;
 }
 
 .sidebar-logo {

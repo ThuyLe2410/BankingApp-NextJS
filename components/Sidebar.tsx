@@ -38,7 +38,15 @@ const Sidebar = ({ user }: { user: user }) => {
               className={cn("sidebar-link", {
                 "bg-bank-gradient": isActive,
               })}>
-              {item.label}
+              <div className="relative size-6">
+                <Image
+                  src={item.imgURL}
+                  alt={item.label}
+                  fill
+                  className={cn({ "brightness-[3] invert-0": isActive })}
+                />
+              </div>
+              <p className={cn('sidebar-label',{"!text-white":isActive})}>{item.label}</p>
             </Link>
           );
         })}
