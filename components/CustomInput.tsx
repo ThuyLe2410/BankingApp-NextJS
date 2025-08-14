@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Form,
   FormControl,
@@ -7,28 +7,49 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import {Input} from "./ui/input"
+import { Input } from "./ui/input";
+import { Control, FieldPath } from "react-hook-form";
+import { authFormSchema } from "@/lib/utils";
+import { z } from "zod";
 
-const CustomInput = ({form, name, label}) => {
+const formSchema = authFormSchema('sign-up');
+interface CustomInputProps {
+  control: Control<z.infer<typeof formSchema>>;
+  name: FieldPath<z.infer<typeof formSchema>>;
+  label: string;
+  placeholder: string;
+}
+
+const CustomInput = ({
+  control,
+  name,
+  label,
+  placeholder,
+}: CustomInputProps) => {
   return (
     <div>
       <FormField
-                control={form.control}
-                name={name}
-                render={({ field }) => (
-                  <div className="form-item">
-                    <FormLabel className="form-label">{label}</FormLabel>
-                    <div className="flex w-full flex-col">
-                      <FormControl>
-                        <Input placeholder="Enter your email" {...field} className="input-class" />
-                      </FormControl>
-                      <FormMessage className="form-message mt-2"/>
-                    </div>
-                  </div>
-                )}
-              />
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <div className="form-item">
+            <FormLabel className="form-label">{label}</FormLabel>
+            <div className="flex w-full flex-col">
+              <FormControl>
+                <Input
+                  placeholder={placeholder}
+                  {...field}
+                  className="input-class"
+                  type={name==='password'? 'password': 'text'}
+                />
+              </FormControl>
+              <FormMessage className="form-message mt-2" />
+            </div>
+          </div>
+        )}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default CustomInput
+export default CustomInput;
