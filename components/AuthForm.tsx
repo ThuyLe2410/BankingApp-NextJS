@@ -18,9 +18,10 @@ import { Input } from "@/components/ui/input";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import {signUp, signIn} from "../lib/actions/user.action"
+import { signUp, signIn } from "../lib/actions/user.action";
 
 const AuthForm = ({ type }: { type: string }) => {
+  console.log("type", type);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = authFormSchema(type);
@@ -36,24 +37,42 @@ const AuthForm = ({ type }: { type: string }) => {
 
   // 2. Define a submit handler.
   const onSubmit = async (data: z.infer<ReturnType<typeof authFormSchema>>) => {
-    // Do something with the form values.
+    console.log("onSubmit");
+    console.log("data", data);
+    setIsLoading(true);
     try {
-        // Sign up with Appwrite & create plaid token
-        if (type==="sign-up") {
-            const newUser = await signUp(data);
-            setUser(newUser)
-        }
+      // Sign up with Appwrite & create plaid token
+      if (type === "sign-up") {
+        const userData = {
+          firstName: data.firstName!,
+          lastName: data.lastName!,
+          address1: data.address1!,
+          city: data.city!,
+          state: data.state!,
+          postalCode: data.postalCode!,
+          dateOfBirth: data.dateOfBirth!,
+          email: data.email,
+          password: data.password,
+        };
+        console.log("userData", userData);
+        const newUser = await signUp(userData);
+        console.log("newUser", newUser);
+        setUser(newUser);
+      }
 
-        if (type==="sign-in") {
-            const response = await signIn({
-                email:data.email,
-                password: data.password
-            })
-
-            if (response) router.push('/')
-        }
+      if (type === "sign-in") {
+        // const response = await signIn({
+        //     email:data.email,
+        //     password: data.password
+        // })
+        // if (response) router.push('/')
+      }
+    } catch (error) {
+      console.log("Error", error);
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
@@ -74,7 +93,7 @@ const AuthForm = ({ type }: { type: string }) => {
               ? "Link Account "
               : type === "sign-in"
               ? "Sign In"
-              : "Sign Out"}
+              : "Sign Up"}
             <p className="text-16 font-normal text-gray-600         ">
               {user
                 ? "Link to your account to get started"
@@ -108,9 +127,15 @@ const AuthForm = ({ type }: { type: string }) => {
 
                   <CustomInput
                     control={form.control}
-                    name="address"
+                    name="address1"
                     placeholder="Enter your specific address"
                     label="Address"
+                  />
+                  <CustomInput
+                    control={form.control}
+                    name="city"
+                    placeholder="Enter your  city"
+                    label="City"
                   />
                   <div className="flex gap-4">
                     <CustomInput
