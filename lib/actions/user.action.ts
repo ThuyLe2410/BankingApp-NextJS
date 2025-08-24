@@ -40,6 +40,7 @@ export const signUp = async (userData: SignUpParams) => {
   }
 };
 
+
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
@@ -48,4 +49,17 @@ export async function getLoggedInUser() {
     console.error("Error", error);
     return null;
   }
+}
+
+export const logoutAccount = async() => {
+    console.log('logout account')
+    try {
+        const {account} = await createSessionClient();
+        (await cookies()).delete('appwrite-session');
+        return await account.deleteSession('current')
+
+    } catch(error) {
+        console.error('Error', error)
+        return null
+    }
 }

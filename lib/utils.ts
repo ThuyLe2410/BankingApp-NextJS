@@ -22,5 +22,5 @@ export const authFormSchema = (type: string) =>
     password: z.string().min(8),
   });
 
-export const parseStringify = (value) => JSON.parse(JSON.stringify(value));
+export const parseStringify = (value:any) => JSON.parse(JSON.stringify(value));
 

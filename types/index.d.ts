@@ -82,3 +82,9 @@ declare interface SignInProps {
   email: string;
   password: string;
 }
+
+
+declare interface FooterProps {
+   user: User;
+   type:string 
+}
