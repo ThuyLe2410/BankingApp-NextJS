@@ -4,10 +4,20 @@ import { ID } from "node-appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
 
+
 export const signIn = async ({email, password}: SignInProps) => {
   try {
     const { account } = await createAdminClient();
-    const response = await account.createEmailPasswordSession(email, password)
+    console.log('signin account', account)
+    const response = await account.createEmailPasswordSession(email, password);
+     console.log('Session created login:', response);
+    //store the session cookie
+    (await cookies()).set("appwrite-session", response.secret,{
+      path:"/",
+      httpOnly:true,
+      sameSite:"strict",
+      secure:true
+    })
     return parseStringify(response)
   } catch (error) {
     console.error("Error", error);

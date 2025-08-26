@@ -33,7 +33,6 @@ declare interface User {
   state: string;
   postalcode: string;
   dateOfBirth: string;
-  ssn: string;
 }
 
 declare interface TotalBalanceProps {
@@ -43,7 +42,7 @@ declare interface TotalBalanceProps {
 }
 
 declare interface SidebarProps {
-  user: User;
+  user: User| null;
 }
 
 declare interface DoughnutChartProps {
@@ -55,7 +54,7 @@ declare interface MobileNavProps {
 }
 
 declare interface RightSidebarProps {
-  user: { firstName: string };
+  user: { name: string };
   transactions: string[];
   banks: string[];
 }
@@ -85,6 +84,6 @@ declare interface SignInProps {
 
 
 declare interface FooterProps {
-   user: User;
-   type:string 
+   user: User | null;
+   type?:string 
 }
